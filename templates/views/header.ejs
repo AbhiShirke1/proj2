@@ -81,11 +81,11 @@
           <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
               
-              <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+              <li><a class="nav-link scrollto " href="/">Home</a></li>
               <li><a class="nav-link scrollto" href="#about">About</a></li>
               <li><a class="nav-link scrollto" href="#services">Services</a></li>
-              <li><a class="nav-link scrollto" href="http://localhost:8000/about">New About</a></li>
-              <li>hi</li>
+              <!-- <li><a class="nav-link scrollto" href="http://localhost:8000/about">New About</a></li> -->
+              
               <!-- <li><a class="nav-link scrollto" href="#departments">Departments</a></li> -->
               <li><a class="nav-link scrollto" href="/caretakers">Caregivers</a></li>
               <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="fa-solid fa-chevron-down"></i></a>
@@ -106,19 +106,20 @@
                     </ul>
                   </li>
                   <li><a class="nav-link scrollto" href="/prime">Prime</a></li>
-                  <span style="color: red;"><%= (typeof msg != "undefined" ? msg : "") %></span>
+                  
                   <!-- <li>hi <%= (typeof names != "undefined" ? names : "") %></li> -->
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
               </nav><!-- .navbar -->
         
               <!-- <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Book a</span> Caregiver</a> -->
-              <a href="/logout" class="appointment-btn scrollto"><span class="d-none d-md-inline">Logout</span></a>
+              <a href="http://localhost:8000/logout" class="appointment-btn scrollto"><span class="d-none d-md-inline">Logout</span></a>
               <a href="/register" class="appointment-btn scrollto"><span class="d-none d-md-inline">Sign-up / Login</span></a>
+              <br>
               <p class="welcome"></p>
               
             </div>
             <span style="font-weight: bolder; position: relative; left: 935px;">Welcome <%= (typeof name != "undefined" ? name : "") %></span>  
-          </header> 
+          </header>
 </body>
 </html>

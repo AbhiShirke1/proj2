@@ -13,7 +13,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="col-md-8">
+    <%- include('header.ejs') %>
+
+    <center>
+       
+
+    <div class="col-md-8" style="margin-top:135px;">
+        <h2>Customer Information</h2>
         <div class="card mb-3">
             <div class="card-body">
                 <div class="row">
@@ -23,7 +29,7 @@
                     <div class="col-sm-9 text-secondary">
                         <!-- Kenneth Valdez -->
                         <span>
-                            <%= (typeof fname !="undefined" ? fname : "" ) %>
+                            <%= (typeof names !="undefined" ? names : "" ) %>
                         </span>
                     </div>
                 </div>
@@ -48,7 +54,7 @@
                     <div class="col-sm-9 text-secondary">
                         <!-- (320) 380-4539 -->
                         <span>
-                            <%= (typeof mobile !="undefined" ? mobile : "" ) %>
+                            <%= (typeof number !="undefined" ? number : "" ) %>
                         </span>
                     </div>
                 </div>
@@ -65,15 +71,11 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a class="btn btn-info " target="__blank" href="/editProfile">Edit</a>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
-        <div class="row gutters-sm">
+        <!-- <div class="row gutters-sm">
             <div class="col-sm-6 mb-3">
                 <div class="card h-100">
                     <div class="card-body">
@@ -94,10 +96,13 @@
                 </div>
             </div>
             
-        </div>
+        </div> -->
 
 
 
     </div>
+
+
+</center>
 </body>
 </html>

@@ -35,7 +35,15 @@ const caretakerSchema = new mongoose.Schema({
 
     password:{
         type: String
-    }
+    },
+
+    usernames:[{
+        type: String
+    }],
+
+    useremail:[{
+        type: String
+    }]
 
 })
 

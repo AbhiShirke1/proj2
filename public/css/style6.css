@@ -1,13 +1,17 @@
 body {
     background: #007bff;
-    background: linear-gradient(to right, #0062E6, #33AEFF);
+    /* background: linear-gradient(to right, #0062E6, #33AEFF); */
+  background-image: linear-gradient(135deg, #b3bbf0 10%, #4242f1 100%);
+    
+
   }
   
   .card-img-left {
     width: 45%;
     /* Link to your background image using in the property below! */
-    background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+    background: scroll center url('https://media.istockphoto.com/photos/male-nurse-home-caregiver-helping-senior-woman-relaxing-on-bed-picture-id1180917233?k=20&m=1180917233&s=612x612&w=0&h=zZDRmXk6Trem8eOfZtUpPlw1h7WCwQjr0uwrjvsdbso=');
     background-size: cover;
+    /* width: 100%; */
   }
   
   .btn-login {

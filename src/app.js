@@ -65,7 +65,7 @@ app.set("views", template_path)
 
 
 app.get('/', (req, res) => {
-    res.render('home', {name: req.cookies.name})
+    res.render('home', { name: req.cookies.name })
 })
 
 app.get('/register', (req, res) => {
@@ -89,12 +89,12 @@ app.post('/register', async (req, res) => {
         return res.status(422).render('reg', { fields: "*Fill all the fields" })
     }
 
-    if(name.length < 4){
-        return res.render('reg', {fields: "*Username is too short"});
+    if (name.length < 4) {
+        return res.render('reg', { fields: "*Username is too short" });
     }
 
-    if(password.length < 4){
-        return res.render('reg', {fields: "*Password is too short"});
+    if (password.length < 4) {
+        return res.render('reg', { fields: "*Password is too short" });
     }
 
     try {
@@ -254,7 +254,7 @@ app.post('/profile', upload.single('profile-file'), async (req, res) => {
 
 //employee
 app.get('/creg', (req, res) => {
-    res.render('creg')
+    res.render('creg', { name: req.cookies.name })
 })
 
 
@@ -373,7 +373,7 @@ app.post("/subs", authen, async (req, res) => {
     // if(sub1)
     const c = req.cookies.sub;
     if (c == "sub1" || c == "sub2" || c == "sub3" || c == "sub4") {
-        return res.render('home', {name: req.cookies.name, error1: "Subscription already taken" })
+        return res.render('home', { name: req.cookies.name, error1: "Subscription already taken" })
     }
     res.cookie("sub", sub);
     const cookieEmail = req.cookies.email;
@@ -389,7 +389,7 @@ app.post("/subs2", authen, async (req, res) => {
     // if(sub1)
     const c = req.cookies.sub;
     if (c == "sub1" || c == "sub2" || c == "sub3" || c == "sub4") {
-        return res.render('home', {name: req.cookies.name, error2: "Subscription already taken" })
+        return res.render('home', { name: req.cookies.name, error2: "Subscription already taken" })
     }
     res.cookie("sub", sub);
     const cookieEmail = req.cookies.email;
@@ -406,7 +406,7 @@ app.post("/subs3", authen, async (req, res) => {
     // if(sub1)
     const c = req.cookies.sub;
     if (c == "sub1" || c == "sub2" || c == "sub3" || c == "sub4") {
-        return res.render('home', {name: req.cookies.name, error3: "Subscription already taken" })
+        return res.render('home', { name: req.cookies.name, error3: "Subscription already taken" })
     }
 
     res.cookie("sub", sub);
@@ -422,7 +422,7 @@ app.post("/subs4", authen, async (req, res) => {
     // if(sub1)
     const c = req.cookies.sub;
     if (c == "sub1" || c == "sub2" || c == "sub3" || c == "sub4") {
-        return res.render('home', {name: req.cookies.name, error4: "Subscription already taken" })
+        return res.render('home', { name: req.cookies.name, error4: "Subscription already taken" })
     }
     res.cookie("sub", sub);
     const cookieEmail = req.cookies.email;
@@ -462,7 +462,7 @@ app.post("/subs4", authen, async (req, res) => {
 app.get('/trial', (req, res) => {
     // const pays = req.body.sub1;
 
-    res.render('trial', {name: req.cookies.name});
+    res.render('trial', { name: req.cookies.name });
 })
 
 app.post('/trial', async (req, res) => {
@@ -478,7 +478,7 @@ app.post('/trial', async (req, res) => {
         const checkup = await Healthcheckup.findOne({ email: c.email })   //database: user entered
 
         if (checkup) {
-            return res.render('trial', { time: "*You have aready registered" });
+            return res.render('trial', { time: "*You have aready registered", name: req.cookies.name });
         }
 
         var name = "";
@@ -519,23 +519,23 @@ app.post('/trial', async (req, res) => {
 });
 
 //sub2
-app.get('/trial2', (req, res)=>{
-    res.render('trial2', {name: req.cookies.name, email: req.cookies.email})
+app.get('/trial2', (req, res) => {
+    res.render('trial2', { name: req.cookies.name, email: req.cookies.email })
 })
 
-app.post('/trial2', async(req, res)=>{
+app.post('/trial2', async (req, res) => {
     const fname = req.body.fname;
     const lname = req.body.lname;
     const email = req.body.email;
     const number = req.body.number;
 
-    const y = await Yoga.findOne({email: email});
+    const y = await Yoga.findOne({ email: email });
 
-    if(y){
-        return res.render('trial2', {name: req.cookies.name, err: "*Already registered for the event"});
+    if (y) {
+        return res.render('trial2', { name: req.cookies.name, err: "*Already registered for the event" });
     }
 
-    const yoga = new Yoga({fname: fname, lname: lname, email: email, phone: number});
+    const yoga = new Yoga({ fname: fname, lname: lname, email: email, phone: number });
 
     const ys = await yoga.save();
 
@@ -555,19 +555,19 @@ app.post('/trial2', async(req, res)=>{
 
     })
 
-    return res.render('trial2', {name: req.cookies.name, success: "You have successfully registered for the event",  email: req.cookies.email})
+    return res.render('trial2', { name: req.cookies.name, success: "You have successfully registered for the event", email: req.cookies.email })
 
 })
 
 //trial3
 
-app.get('/trial3', (req, res)=>{
-    res.render('trial3', {name: req.cookies.name, email: req.cookies.email});
+app.get('/trial3', (req, res) => {
+    res.render('trial3', { name: req.cookies.name, email: req.cookies.email });
 })
 
 //trial4
-app.get('/trial4', (req, res)=>{
-    res.render('trial4', {name: req.cookies.name, email: req.cookies.email});
+app.get('/trial4', (req, res) => {
+    res.render('trial4', { name: req.cookies.name, email: req.cookies.email });
 })
 
 
@@ -578,7 +578,7 @@ app.get('/caretakers', authen, function (req, res, next) {
     emp.exec(function (err, data) {
         if (err) res.send(err);
 
-        return res.render('caretakers', {name: req.cookies.name, records: data });
+        return res.render('caretakers', { name: req.cookies.name, records: data });
     })
 
 
@@ -599,7 +599,7 @@ app.post('/caretakers', (req, res) => {
         let temp = [];
         for (const ctnData of data) {
             if (one == "Charge less than Rs60") {
-                if ((ctnData.charge >= 20 && ctnData.charge <= 60)) {
+                if ((ctnData.charge <= 60)) {
                     temp.push(ctnData);
                 }
 
@@ -612,7 +612,7 @@ app.post('/caretakers', (req, res) => {
             }
         }
 
-        return res.render('caretakers', {name: req.cookies.name, records: temp });
+        return res.render('caretakers', { name: req.cookies.name, records: temp });
     })
 })
 
@@ -654,8 +654,8 @@ app.post('/caretakerReg', upload.single('profile-file'), async (req, res) => {
 
     var arr = [slots, slotst, slotsth, slotsf];
 
-    if(pass != cpass){
-        return res.render('caretakerReg', { message: "*Password and Confirm password should be same"});
+    if (pass != cpass) {
+        return res.render('caretakerReg', { message: "*Password and Confirm password should be same" });
     }
 
     const charge = req.body.charge;
@@ -716,33 +716,49 @@ app.post('/ctLogin', async (req, res) => {
     const cemail = req.body.cemail;
     const cpassword = req.body.cpassword;
 
-    
-    const careTakerDB = await Caretaker.findOne({ email: cemail });
-    console.log(careTakerDB);
-    
-    // if(careTakerDB.password != cpassword)
-    // return res.render('ctLogin', { err: "*Invalid Credentials" });
-    
-    if (careTakerDB) {
-        return res.redirect('/ctDashboard')
-    }
+
+    const cd = await Caretaker.findOne({ email: cemail });
+
+    // console.log(cd.useremail.length);
+    let ems = cd.useremail.length;
+
+
+    // if (ems == 1) {
+        const up = await Userprofile.find({ email: cd.useremail });
+        console.log(up);
+
+        return res.render('ctDashboard', { name: req.cookies.name, email: cd.useremail, names: cd.usernames, number: up[0].number, address: up[0].address });
+    // }
+
+    // if(ems==4){
+    //     let ue1 = cd.useremail[0];
+    //     let ue2 = cd.useremail[1];
+
+    //     const up = await Userprofile.find({ email: cd.useremail });
+    //     console.log(up);
+
+    //     return res.render('ctDashboard', { name: req.cookies.name, email: cd.useremail, names: cd.usernames, number: up[0].number, address: up[0].address });
+
+    // }
+
+
 
 
 })
 
 //prime
-app.get('/prime', authen,(req, res) => {
+app.get('/prime', authen, (req, res) => {
     const c = req.cookies.sub;
     if (c == "sub1") {
-        return res.render('trial', {name: req.cookies.name});
+        return res.render('trial', { name: req.cookies.name });
     }
 
-    else if(c == "sub2"){
-        return res.render('trial2', {name: req.cookies.name, email: req.cookies.email});
+    else if (c == "sub2") {
+        return res.render('trial2', { name: req.cookies.name, email: req.cookies.email });
     }
 
-    else if(c == "sub3"){
-        return res.render('trial3', {name: req.cookies.name, email: req.cookies.email});
+    else if (c == "sub3") {
+        return res.render('trial3', { name: req.cookies.name, email: req.cookies.email });
     }
 
     return res.render("noSubs")
@@ -773,7 +789,7 @@ app.post("/caretakerBook", async (req, res) => {
         if (err) res.send(err)
 
 
-        res.render('caretakerBook', {name: req.cookies.name, records: data })
+        res.render('caretakerBook', { name: req.cookies.name, records: data })
 
     })
 
@@ -793,84 +809,106 @@ app.post('/finalBook', async (req, res) => {
 
 
     const ct = await Caretaker.find({ email: email });
+    // const user = await Registered.find({email: req.cookies.email});
+    console.log(ct[0].usernames);
+
+    // const user = req.cookies.slot; 
+    // console.log(user);
+    // if(user=="booked"){
+    //     return res.send("You have already booked a caretaker")
+    // }
 
     //  console.log(ct);
     let ot = true;
 
- 
+
 
     let c = [];
+    let actual = [];
+    let usernames = [];
+    usernames = ct[0].usernames;
+    let useremail = [];
+    useremail = ct[0].useremail;
+    let un = 0;
+    let ai = 0;
     c[0] = cone;
     c[1] = ctwo;
     c[2] = cthree;
     c[3] = cfour;
 
     let temp = ct[0].slot;
-    let a = 0, b = 0, d=0;
-
-    // console.log(c[0] == temp[0]);
+    let a = 0, b = 0, d = 0;
 
 
     if (c[0] == temp[0]) {
         temp[0] = "busy";
-        // Caretaker.findOneAndUpdate({ email: email }, { slot: temp }, (err, result) => {
-        //     if (err) {
-        //         res.send(err);
-        //     }
-        // })
+        actual[ai] = "9-12am";
+        ai++;
+
+        // usernames[un] = req.cookies.name + " 9-12am";
+        usernames.push(req.cookies.name + " 9-12am")
+        useremail.push(req.cookies.email)
+        // useremail[un] = req.cookies.email;
+
+        un++;
+
         b = 1;
-        d=1;
+        d = 1;
         // console.log(1);
     }
 
     else {
-        if (c[0] == "9-12am" && temp[0] == "busy" || (ct[0].slot[1]==null)) {
+        if (c[0] == "9-12am" && temp[0] == "busy" || (ct[0].slot[1] == null)) {
             a = 1;
             return res.send("Caretaker is busy");
         }
 
-        // else{
-        //     a=1;
-        //     return res.send("No") 
-        // }
+
     }
 
     if (c[1] == temp[1]) {
         temp[1] = "busy";
-        // Caretaker.findOneAndUpdate({ email: email }, { slot: temp }, (err, result) => {
-        //     if (err) {
-        //         res.send(err);
-        //     }
-        // })
+        actual[ai] = "12-3pm";
+        ai++;
+
+        // usernames[un] = req.cookies.name + " 12-3pm";
+        // useremail[un] = req.cookies.email;
+
+        usernames.push(req.cookies.name + " 12-3pm")
+        useremail.push(req.cookies.email)
+
+        un++;
 
         b = 1;
-        d=1;
+        d = 1;
 
         // console.log(2);
     }
 
     else {
-        if (c[1] == "12-3pm" && temp[1] == "busy" || (ct[0].slot[1]==null)) {
+        if (c[1] == "12-3pm" && temp[1] == "busy" || (ct[0].slot[1] == null)) {
             a = 1;
             return res.send("Caretaker is busy");
         }
 
-        // else{
-        //     a=1;
-        //     return res.send("No") 
-        // }
+
     }
 
     if (c[2] == temp[2]) {
         temp[2] = "busy";
-        // Caretaker.findOneAndUpdate({ email: email }, { slot: temp }, (err, result) => {
-        //     if (err) {
-        //         res.send(err);
-        //     }
-        // })
+        actual[ai] = "3-6pm";
+        ai++;
+
+        // usernames[un] = req.cookies.name + " 3-6pm";
+        // useremail[un] = req.cookies.email;
+
+        usernames.push(req.cookies.name + " 3-6pm")
+        useremail.push(req.cookies.email)
+
+        un++;
 
         b = 1;
-        d=1;
+        d = 1;
 
         // console.log(3);
     }
@@ -878,53 +916,52 @@ app.post('/finalBook', async (req, res) => {
 
 
     else {
-        if (c[2] == "3-6pm" && temp[2] == "busy" || (ct[0].slot[1]==null)) {
+        if (c[2] == "3-6pm" && temp[2] == "busy" || (ct[0].slot[1] == null)) {
             a = 1;
             return res.send("Caretaker is busy");
         }
 
-        // else{
-        //     a=1;
-        //     return res.send("No") 
-        // }
+
     }
 
     if (c[3] == temp[3]) {
         temp[3] = "busy";
-        // Caretaker.findOneAndUpdate({ email: email }, { slot: temp }, (err, result) => {
-        //     if (err) {
-        //         res.send(err);
-        //     }
-        // })
+        actual[ai] = "6-9pm";
+        ai++;
+
+        // usernames[un] = req.cookies.name + " 6-9pm";
+        // useremail[un] = req.cookies.email;
+
+        usernames.push(req.cookies.name + " 6-9pm")
+        useremail.push(req.cookies.email)
+
+        un++;
+
 
         b = 1;
-        d=1;
+        d = 1;
 
         // console.log(4);
     }
 
     else {
         // console.log(c[3], temp[3]);
-        if (c[3] == "6-9pm" && temp[3] == "busy" || (ct[0].slot[1]==null)) {
+        if (c[3] == "6-9pm" && temp[3] == "busy" || (ct[0].slot[1] == null)) {
             a = 1;
             return res.send("Caretaker is busy");
         }
 
-        // else{
-        //     a=1;
-        //     return res.send("No")
-        // }
     }
 
     // ct[0].slot = temp;
     // console.log(temp[3]);
 
-    if(d==0){
+    if (d == 0) {
         return res.send("Please select slot")
     }
 
-    if(b==1){
-        Caretaker.findOneAndUpdate({ email: email }, { slot: temp }, (err, result) => {
+    if (b == 1) {
+        Caretaker.findOneAndUpdate({ email: email }, { slot: temp, usernames: usernames, useremail: useremail }, (err, result) => {
             if (err) {
                 res.send(err);
             }
@@ -932,33 +969,11 @@ app.post('/finalBook', async (req, res) => {
     }
 
 
-    let userSlot = [];
-    let indx=0;
-
-    if(temp[0]=="busy"){
-        userSlot[indx] = "9-12am";
-        indx++;
-    }
-
-    if(temp[1]=="busy"){
-        userSlot[indx] = "12-3pm";
-        indx++;
-    }
-
-    if(temp[2]=="busy"){
-        userSlot[indx] = "3-6pm";
-        indx++;
-    }
-
-    if(temp[3]=="busy"){
-        userSlot[indx] = "6-9pm";
-        indx++;
-    }
 
 
 
-    Registered.findOneAndUpdate({email: req.cookies.email}, {slot: userSlot, ctName: email}, (err, result)=>{
-        if(err){
+    Registered.findOneAndUpdate({ email: req.cookies.email }, { slot: actual, ctName: email }, (err, result) => {
+        if (err) {
             res.send(err);
         }
     })
@@ -970,7 +985,7 @@ app.post('/finalBook', async (req, res) => {
         to: `${req.cookies.email}`,
         subject: 'Age Care',
         text: `Greetings from AgeCare,
-        You have succesfully booked a caretaker, ${email} in the time slot ${userSlot}.
+        You have succesfully booked a caretaker, ${email} in the time slot ${actual}.
         Caretaker will visit 10-15 minutes prior to the scheduled time. `
     }
 
@@ -985,6 +1000,7 @@ app.post('/finalBook', async (req, res) => {
 
 
     if (a == 0) {
+        // res.cookie("slot", "booked");
         res.redirect('https://rzp.io/l/YTDpmDga')
     }
 
@@ -992,28 +1008,28 @@ app.post('/finalBook', async (req, res) => {
 });
 
 
-app.get('/userProfile',authen,  async(req, res)=>{
+app.get('/userProfile', authen, async (req, res) => {
     const email = req.cookies.email;
-    const ifExist = await Userprofile.findOne({email: email});
+    const ifExist = await Userprofile.findOne({ email: email });
     // console.log(ifExist);
 
-    const hist = await Registered.findOne({email: email});
+    const hist = await Registered.findOne({ email: email });
     let slotArray = [];
     slotArray = hist.slot;
-    console.log(slotArray[0]);
-    if(ifExist){
-        return res.render('userProfile', {name: req.cookies.name, img: req.cookies.name, fname: ifExist.fname, email: ifExist.email, mobile: ifExist.number, address: ifExist.address,time: "Time slot: ", slotArray: slotArray, ctName: "Caretaker email: ", ctEmail: hist.ctName});
+    // console.log(slotArray[0]);
+    if (ifExist) {
+        return res.render('userProfile', { name: req.cookies.name, img: req.cookies.name, fname: ifExist.fname, email: ifExist.email, mobile: ifExist.number, address: ifExist.address, time: "Time slot: ", slotArray: slotArray, ctName: "Caretaker email: ", ctEmail: hist.ctName });
 
     }
 
-    res.render('userProfile', {name: req.cookies.name, img: req.cookies.name});
+    res.render('userProfile', { name: req.cookies.name, img: req.cookies.name });
 })
 
-app.get('/editProfile', (req, res)=>{
+app.get('/editProfile', (req, res) => {
     res.render('editProfile');
 })
 
-app.post('/editProfile', upload.single('profile-file'), async(req, res)=>{
+app.post('/editProfile', upload.single('profile-file'), async (req, res) => {
 
     try {
         const fname = req.body.fname;
@@ -1025,11 +1041,11 @@ app.post('/editProfile', upload.single('profile-file'), async(req, res)=>{
         const userExist = await Userprofile.findOne({ email: email })   //database: user entered
 
         if (userExist) {
-            return res.render('editProfile',{ msg2: "*Profile exists." })
+            return res.render('editProfile', { msg2: "*Profile exists." })
             // return res.render('profile2', { message: `${fname}.jpg`, name: `${fname}`, email: `${email}`, address: `${address}` });
         }
 
-        const user = new Userprofile({ fname: fname, email: email, number: mobile, address: address});
+        const user = new Userprofile({ fname: fname, email: email, number: mobile, address: address });
 
         const userRegister = await user.save()
 
@@ -1047,29 +1063,29 @@ app.post('/editProfile', upload.single('profile-file'), async(req, res)=>{
 })
 
 //ctDasdboard
-app.get('/ctDashboard', (req, res)=>{
+app.get('/ctDashboard', (req, res) => {
     res.render('ctDashboard');
 })
 
 
 //feedback
-app.post('/feedback', authen, async(req, res)=>{
+app.post('/feedback', authen, async (req, res) => {
     const names = req.body.names;
     const email = req.body.email;
-    const subject= req.body.subject;
+    const subject = req.body.subject;
     const message = req.body.message;
 
-    console.log(names);
+    // console.log(names);
 
     const msg = new Feedback({ names: names, email: email, subject: subject, message: message })
 
     const s = await msg.save();
 
-    res.render('feedback', {name: req.cookies.name, repl: "Thank you for your valuable feedback!", email: req.cookies.email });
+    res.render('feedback', { name: req.cookies.name, repl: "Thank you for your valuable feedback!", email: req.cookies.email });
 })
 
 
-app.get('/yogaForm', (req, res)=>{
+app.get('/yogaForm', (req, res) => {
     res.render('yogaForm');
 })
 
